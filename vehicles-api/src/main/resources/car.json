@@ -1,0 +1,22 @@
+{
+  "condition": "NEW",
+  "details": {
+    "body": "Wagon",
+    "model": "Land Cruiser 76",
+    "manufacturer": {
+      "code": 105,
+      "name": "Land Cruiser"
+    },
+    "numberOfDoors": 4,
+    "fuelType": "Diesel",
+    "engine": "4.5 V8",
+    "mileage": 22000,
+    "modelYear": 2019,
+    "productionYear": 2019,
+    "externalColor": "Metallic Grey"
+  },
+  "location": {
+    "lat": 40.73061,
+    "lon": -73.935242
+  }
+}
