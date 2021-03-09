@@ -78,11 +78,11 @@ public class CarService {
         // back a random Price within the range of id's pre-loaded in the database
         // This way we will never run out of Prices should we generate more Cars
         // than there are Price records.
-        int randomId = new Random().nextInt(NUMBER_OF_PRICE_RECORDS - 1) + 1;
+        int randomVehicleId = new Random().nextInt(NUMBER_OF_PRICE_RECORDS - 1) + 1;
 
         Price price = pricing
                 .get()
-                .uri("prices/" + randomId)
+                .uri("prices/" + randomVehicleId)
                 .retrieve()
                 .bodyToMono(Price.class)
                 .block();
