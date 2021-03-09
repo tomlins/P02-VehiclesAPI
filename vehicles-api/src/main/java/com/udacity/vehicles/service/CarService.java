@@ -82,7 +82,7 @@ public class CarService {
 
         Price price = pricing
                 .get()
-                .uri("prices/" + randomVehicleId)
+                .uri("/prices/" + randomVehicleId)
                 .retrieve()
                 .bodyToMono(Price.class)
                 .block();
