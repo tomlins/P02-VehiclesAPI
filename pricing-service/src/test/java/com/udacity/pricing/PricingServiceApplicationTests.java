@@ -9,15 +9,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PricingServiceApplicationTests {
 
@@ -27,20 +31,25 @@ public class PricingServiceApplicationTests {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+	@Autowired
+	private MockMvc mvc;
+
+
 	@Test
 	public void contextLoads() {
 	}
 
 	@Test
-	public void getAllPrices() {
-		ResponseEntity<Price[]> response =
-				this.restTemplate.getForEntity("http://localhost:" + port + "/prices", Price[].class);
-
-		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+	public void getAllPricesTest() throws Exception {
+		mvc.perform(
+				get(new URI("http://localhost:8082/prices"))
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON))
+						.andExpect(status().isOk());
 	}
 
 	@Test
-	public void getPrice() {
+	public void getPriceTest() {
 		ResponseEntity<Price> response =
 				this.restTemplate.getForEntity("http://localhost:" + port + "/prices/1", Price.class);
 
